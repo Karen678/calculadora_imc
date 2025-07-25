@@ -1,4 +1,3 @@
-
 def calcular_imc(peso, estatura):
     imc = peso / (estatura ** 2)
     return imc
@@ -13,17 +12,28 @@ def clasificar_imc(imc):
     else:
         return "Obesidad"
 
-if __name__ == "__main__":
-    try:
-        peso = float(input("Introduce tu peso en kilogramos (kg): "))
-        estatura = float(input("Introduce tu estatura en metros (m): "))
-        
-        if peso <= 0 or estatura <= 0:
-            print("El peso y la estatura deben ser mayores que cero.")
+def menu():
+    while True:
+        print("\n=== Calculadora de IMC ===")
+        print("1. Calcular IMC")
+        print("2. Salir")
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            try:
+                peso = float(input("Introduce tu peso en kg: "))
+                estatura = float(input("Introduce tu estatura en metros: "))
+                imc = calcular_imc(peso, estatura)
+                clasificacion = clasificar_imc(imc)
+                print(f"\nTu IMC es: {imc:.2f}")
+                print(f"Clasificación: {clasificacion}")
+            except ValueError:
+                print("Por favor, introduce valores válidos.")
+        elif opcion == "2":
+            print("Saliendo del programa...")
+            break
         else:
-            imc = calcular_imc(peso, estatura)
-            clasificacion = clasificar_imc(imc)
-            print(f"\nTu IMC es: {imc:.2f}")
-            print(f"Clasificación: {clasificacion}")
-    except ValueError:
-        print("Error: Por favor, introduce valores numéricos válidos.")
+            print("Opción no válida. Intenta de nuevo.")
+
+if __name__ == "__main__":
+    menu()
